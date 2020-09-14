@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 import Route from './Route';
 
 import SignIn from '../pages/SignIn';
@@ -10,7 +10,7 @@ import Profile from '../pages/Profile';
 
 export default function Routes(){
     return(
-        <Switch>
+        <BrowserRouter>
             <Route path="/" exact component={SignIn}/>
             <Route path="/register" component={SignUp}/>
 
@@ -18,6 +18,6 @@ export default function Routes(){
             <Route path="/profile" component={Profile} isPrivate/>
 
             <Route path="/" component={()=> <h1>404</h1> } />
-        </Switch>
+        </BrowserRouter>
     );
 }
