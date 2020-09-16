@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {Route, Redirect} from 'react-router-dom';
 
 import AuthLayout from '~/pages/_layouts/auth';
 import DefaultLayout from '~/pages/_layouts/default';
 
-import store from '~/store';
+import {store} from '~/store';
 
 export default function RouteWrapper({
     component: Component,
@@ -13,6 +13,10 @@ export default function RouteWrapper({
     ...rest
 }){
     const [signed, setSigned] = useState(false)
+
+    useEffect(()=>{
+        setSigned(store.getState().auth.signed)
+    },[])
 
     store.subscribe(() =>{
             setSigned(store.getState().auth.signed)
