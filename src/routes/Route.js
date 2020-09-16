@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {Route, Redirect} from 'react-router-dom';
 
@@ -12,7 +12,12 @@ export default function RouteWrapper({
     isPrivate,
     ...rest
 }){
-    const {signed} = store.getState().auth;
+    const [signed, setSigned] = useState(false)
+
+    store.subscribe(() =>{
+            setSigned(store.getState().auth.signed)
+        }
+    )
 
     if(!signed && isPrivate){
         return <Redirect to="/"/>
